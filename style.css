@@ -1,0 +1,177 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #1f293a;
+  padding-top:2rem;
+}
+.container {
+  position: relative;
+  width: 30%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.container span {
+  position: absolute;
+  left: 0;
+  width: 32px;
+  height: 6px;
+  background: #2c4766;
+  border-radius: 8px;
+  transform-origin: 128px;
+  transform: scale(2.2) rotate(calc(var(--i) * (360deg / 50)));
+  animation: animateBlink 3s linear infinite;
+  animation-delay: calc(var(--i) * (3s / 50));
+}
+@keyframes animateBlink {
+  0% {
+    background: #0ef;
+  }
+  25% {
+    background: #2c4766;
+  }
+}
+.form-box {
+  display: flex;
+  flex-direction: column;
+  width:30rem;
+  height: 100%;
+  /* background: rgba(255, 255, 255, 0.1); */
+  border-radius: 10px;
+  padding: 30px;
+  /* box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5); */
+}
+h2 {
+  font-size: 2em;
+  color: #0ef;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.input-box {
+  position: relative;
+  margin: 25px 0;
+}
+.input-box input,
+.input-box textarea,
+.input-box select {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: 2px solid #2c4766;
+  outline: none;
+  border-radius: 40px;
+  font-size: 1em;
+  color: #fff;
+  padding: 0 20px;
+  transition: 0.5s ease;
+}
+.input-box textarea {
+  height: 100px;
+  padding: 15px 20px;
+}
+.input-box input:focus,
+.input-box input:valid,
+.input-box textarea:focus,
+.input-box textarea:valid {
+  border-color: #0ef;
+}
+.input-box label {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  font-size: 1em;
+  color: #fff;
+  pointer-events: none;
+  transition: 0.5s ease;
+}
+.input-box input:focus ~ label,
+.input-box input:valid ~ label,
+.input-box textarea:focus ~ label,
+.input-box textarea:valid ~ label {
+  top: 1px;
+  font-size: 0.8em;
+  background: #1f293a;
+  padding: 0 6px;
+  color: #0ef;
+}
+.btn {
+  width: 100%;
+  height: 45px;
+  background: #0ef;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 1em;
+  color: #1f293a;
+  font-weight: 600;
+  transition: 0.5s ease;
+}
+.btn:hover {
+  background: #1f293a;
+  color: #0ef;
+  border: 2px solid #0ef;
+}
+.link {
+  text-align: center;
+  margin-top: 20px;
+  color:#fff
+}
+.link a {
+  color: #0ef;
+  text-decoration: none;
+  font-weight: 600;
+}
+.link a:hover {
+  text-decoration: underline;
+}
+#qrcode {
+  position: bottom;
+  margin-top: 10rem;
+}
+.student-details {
+  color: #fff;
+  height: 80vh;
+}
+.student-details p {
+  margin: 10px 0;
+  
+}
+.student-details img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px;
+  width: 200px;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+.card:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.2);
+}

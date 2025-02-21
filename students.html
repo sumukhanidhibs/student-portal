@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students List</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-box">
+            <h2>Students List</h2>
+            <div id="studentList" class="card-container"></div>
+            <div class="link">
+                <a href="portal.html">Add New Student</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fetch students from localStorage
+        const students = JSON.parse(localStorage.getItem('students')) || [];
+
+        // Display student names in cards
+        const studentList = document.getElementById('studentList');
+        students.forEach((student, index) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.textContent = student.name;
+            card.addEventListener('click', () => {
+                // Redirect to student details page with the student index
+                window.location.href = `student-details.html?index=${index}`;
+            });
+            studentList.appendChild(card);
+        });
+
+        // Show message if no students are found
+        if (students.length === 0) {
+            studentList.innerHTML = '<p class="text-center">No students found.</p>';
+        }
+    </script>
+</body>
+</html>

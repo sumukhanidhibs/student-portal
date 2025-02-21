@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Information Portal</title>
+   <link rel="stylesheet" href="style.css">
+    
+    
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-box">
+          <h2>Student Information Portal</h2>
+          <form id="studentForm">
+              <div class="input-box">
+                  <input type="text" id="name" required>
+                  <label>Name</label>
+              </div>
+              <div class="input-box">
+                  <input type="number" id="age" required>
+                  <label>Age</label>
+              </div>
+              <div class="input-box">
+                  <input type="text" id="class" required>
+                  <label>Class</label>
+              </div>
+              <div class="input-box">
+                  <textarea id="address" required></textarea>
+                  <label>Address</label>
+              </div>
+              <div class="input-box">
+                  <input type="file" id="sslcMarks" accept=".pdf,.jpg,.png" required>
+              </div>
+              <div class="input-box">
+                  <input type="file" id="pucMarks" accept=".pdf,.jpg,.png" required>
+              </div>
+              <button type="submit" class="btn">Submit</button>
+              <div class="link">
+                  <a href="students.html">View Students List</a>
+              </div>
+          </form>
+      </div>
+  </div>
+
+    <script>
+      document
+        .getElementById("studentForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Get form data
+          const name = document.getElementById("name").value;
+          const age = document.getElementById("age").value;
+          const studentClass = document.getElementById("class").value;
+          const address = document.getElementById("address").value;
+          const sslcMarks = document.getElementById("sslcMarks").files[0];
+          const pucMarks = document.getElementById("pucMarks").files[0];
+
+          // Convert files to Base64
+          const toBase64 = (file) =>
+            new Promise((resolve, reject) => {
+              const reader = new FileReader();
+              reader.readAsDataURL(file);
+              reader.onload = () => resolve(reader.result);
+              reader.onerror = (error) => reject(error);
+            });
+
+          Promise.all([toBase64(sslcMarks), toBase64(pucMarks)]).then(
+            ([sslcBase64, pucBase64]) => {
+              // Create student object
+              const studentData = {
+                name: name,
+                age: age,
+                class: studentClass,
+                address: address,
+                sslcMarks: sslcBase64,
+                pucMarks: pucBase64,
+              };
+
+              // Save student data to localStorage
+              let students = JSON.parse(localStorage.getItem("students")) || [];
+              students.push(studentData);
+              localStorage.setItem("students", JSON.stringify(students));
+
+              alert("Student information saved successfully!");
+            }
+          );
+        });
+    </script>
+  </body>
+</html>

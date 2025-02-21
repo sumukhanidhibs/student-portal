@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Details</title>
+    <script src="
+https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs@0.0.2/qrcode.min.js
+"></script>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="qrcode.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      
+      <div class="form-box">
+        <h2>Student Details</h2>
+        <div id="studentDetails" class="student-details"></div>
+        
+      </div>
+      <div id="qrcode"></div>
+        <div class="link">
+          <a href="students.html">Back to Students List</a>
+        </div>
+    </div>
+    <script>
+      // Get the student index from the URL query parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const studentIndex = urlParams.get("index");
+
+      // Fetch student details from localStorage
+      const students = JSON.parse(localStorage.getItem("students")) || [];
+      const student = students[studentIndex];
+
+      // Display student details
+      const studentDetails = document.getElementById("studentDetails");
+      if (student) {
+        studentDetails.innerHTML = `
+                <p><strong>Name:</strong> ${student.name}</p>
+                <p><strong>Age:</strong> ${student.age}</p>
+                <p><strong>Class:</strong> ${student.class}</p>
+                <p><strong>Address:</strong> ${student.address}</p>
+                <p><strong>SSLC Marks Card:</strong></p>
+                <img src="${student.sslcMarks}" alt="SSLC Marks Card" style="max-width: 100%;256px; max-height:256px;">
+                <p><strong>PUC Marks Card:</strong></p>
+                <img src="${student.pucMarks}" alt="PUC Marks Card" style="max-width: 256px; max-height:256px;">
+            `;
+
+        const studDetails = `      
+        Name: ${student.name}, 
+        Age:${student.age},
+        Class:${student.class},
+        Address:${student.address}
+        `;
+
+        new QRCode(document.getElementById("qrcode"), {
+          text: studDetails,
+          width: 150,
+          height: 150,
+        });
+      } else {
+        studentDetails.innerHTML =
+          '<p class="text-center">Student not found.</p>';
+      }
+    </script>
+  </body>
+</html>
